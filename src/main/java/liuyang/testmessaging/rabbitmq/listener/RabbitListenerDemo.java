@@ -17,16 +17,21 @@ public class RabbitListenerDemo {
     @RabbitListener(queues = {"liuyang.q"})
     public void receiveQ01(Object msg) {
     // public void receive(Message msg) { // 可以拿到消息头信息 msg.getBody(); msg.getMessageProperties();
-      log.info("RabbitListenerDemo.receive liuyang.q");
-      // 处理消息...
-      System.out.println(msg);
+      log.info("liuyang.q = {}", msg);
     }
 
-    @RabbitListener(queues = {"liuyang.q.emps", "liuyang.q.news"})
+    @RabbitListener(queues = {"liuyang.q.emps"})
     public void receiveQ2(Object msg) {
-        log.info("RabbitListenerDemo.receive liuyang.q.emps liuyang.q.news");
-        // 处理消息...
-        log.info("msg = {}", msg);
-        log.info("msg = {}", JSON.toJSONString(msg));
+        log.info("liuyang.q.emps = {}", msg);
+    }
+
+    @RabbitListener(queues = {"liuyang.q.gulixueyuan.news"})
+    public void receiveQ3(Object msg) {
+        log.info("liuyang.q.gulixueyuan.news = {}", msg);
+    }
+
+    @RabbitListener(queues = {"liuyang.q.news"})
+    public void receiveQ4(Object msg) {
+        log.info("liuyang.q.news = {}", msg);
     }
 }

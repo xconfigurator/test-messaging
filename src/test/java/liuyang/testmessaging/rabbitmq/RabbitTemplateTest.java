@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,29 +33,30 @@ public class RabbitTemplateTest {
         log.info("hello, rabbitmq");
         // exchange
         // routeKey
-        // message
+        // message  需要自己定制序列化规则
         // rabbitTemplate.send(exchange, routeKey, message);
 
         // ///////////////////////////////////////////////////////////
-        // 常用：
+        // 常用：convertAndSend 当然需要注册MessageConverter，参见RabbitConfig
         // obj会被自动序列化转换成message
         // rabbitTemplate.convertAndSend(exchange, routeKey, obj);
 
         // String
-        // rabbitTemplate.convertAndSend("liuyang.exchange.direct", "liuyang.q", "hello, rabbittemplate");
+        rabbitTemplate.convertAndSend("liuyang.exchange.direct", "liuyang.q.gulixueyuan.news", String.format(String.format("hello, rabbittemplate " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()))));
 
         // Object
         Map<String, String> param = new HashMap<>();
         param.put("k1", "foo");
         param.put("k2", "bar");
-        rabbitTemplate.convertAndSend("liuyang.exchange.direct", "liuyang.q", param);
+        param.put("datetime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+        rabbitTemplate.convertAndSend("liuyang.exchange.direct", "liuyang.q", param);// 如果选择fanout的exchange，则填什么routingKey是无所谓的。
     }
 
     // 接收
-    // @RepeatedTest(7)
+    @RepeatedTest(2)
     @Test
     public void testResiveAndConvert() {
-        Object o = rabbitTemplate.receiveAndConvert("liuyang.q");
+        Object o = rabbitTemplate.receiveAndConvert("liuyang.q.gulixueyuan.news");
         log.info("o.getClass() = " + o.getClass());
         System.out.println(o);
     }
