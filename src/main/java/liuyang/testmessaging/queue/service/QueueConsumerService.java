@@ -1,0 +1,47 @@
+package liuyang.testmessaging.queue.service;
+
+import liuyang.testmessaging.queue.QueueService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * @author liuyang(wx)
+ * @since 2021/12/2
+ */
+@Service
+@Slf4j
+public class QueueConsumerService {
+    @Autowired
+    QueueService queueService;
+
+    // 不可以写在这里！！应通过QueueConsumerInit来启动
+    /*
+    @PostConstruct
+    public void doSomethingSequentially() {
+        doService();
+    }*/
+
+    @Async// Spring 线程池管理的一个独立的线程执行它
+    public void doService() {
+        while (true) {// queue是一个阻塞队列，不用担心这样写会CPU 100%
+            try {
+                String msg = queueService.getQueue().take();
+
+                // 这里执行真正的业务了逻辑。比如入库
+                log.info("排队的消息数{}, 正在处理消息{}" , queueService.getQueue().size(), msg);
+
+                // 模拟数据库缓慢执行
+                TimeUnit.SECONDS.sleep(4);
+
+            } catch (InterruptedException e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+    }
+
+}
