@@ -1,7 +1,7 @@
-package liuyang.testmessaging.queue20211202.controller;
+package liuyang.testmessaging.modules.linkedblockingqueue.queue20211202.controller;
 
 import liuyang.testmessaging.common.utils.R;
-import liuyang.testmessaging.queue20211202.service.QueueProducerService;
+import liuyang.testmessaging.modules.linkedblockingqueue.queue20211202.service.QueueProducerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

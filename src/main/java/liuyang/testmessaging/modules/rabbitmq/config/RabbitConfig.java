@@ -1,9 +1,5 @@
-package liuyang.testmessaging.rabbitmq.config;
+package liuyang.testmessaging.modules.rabbitmq.config;
 
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.FanoutExchange;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;

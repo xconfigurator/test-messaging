@@ -6,4 +6,4 @@
  * @author liuyang(wx)
  * @since 2021/12/2
  */
-package liuyang.testmessaging.queue20211202;
+package liuyang.testmessaging.modules.linkedblockingqueue.queue20211202;

@@ -1,4 +1,4 @@
-package liuyang.testmessaging.queue20211202.service;
+package liuyang.testmessaging.modules.linkedblockingqueue.queue20211202.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

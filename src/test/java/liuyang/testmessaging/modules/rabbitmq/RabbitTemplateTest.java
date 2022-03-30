@@ -1,4 +1,4 @@
-package liuyang.testmessaging.rabbitmq;
+package liuyang.testmessaging.modules.rabbitmq;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.RepeatedTest;

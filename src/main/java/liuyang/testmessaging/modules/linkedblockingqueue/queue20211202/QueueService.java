@@ -1,4 +1,4 @@
-package liuyang.testmessaging.queue20211202;
+package liuyang.testmessaging.modules.linkedblockingqueue.queue20211202;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package liuyang.testmessaging.rabbitmq.listener;
+package liuyang.testmessaging.modules.rabbitmq.listener;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
