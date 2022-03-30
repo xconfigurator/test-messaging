@@ -1,5 +1,9 @@
 package liuyang.testmessaging.rabbitmq.config;
 
+import org.springframework.amqp.core.DirectExchange;
+import org.springframework.amqp.core.FanoutExchange;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
@@ -18,6 +22,7 @@ import org.springframework.context.annotation.Configuration;
  * @author liuyang
  * @scine 2021/4/16
  * @update 2021/11/23
+ * @update 2022/03/07   在配置文件中创建exchange和queue并执行绑定。
  */
 @Configuration
 @EnableRabbit // 配合RabbitListener
@@ -28,4 +33,37 @@ public class RabbitConfig {
     public MessageConverter messageConverter() {
         return new Jackson2JsonMessageConverter();
     }
+
+/*
+    // 20220307
+    // 根据Eric视频，在这个部位可以创建exchange和queue并将其绑定。
+    // 1. 创建exchange
+    // liuyang.exchange.direct
+    @Bean
+    public DirectExchange liuyangExchangeDirect() {
+        return new DirectExchange("liuyang.exchange.direct", true, false);
+    }
+    // liuyang.exchange.fanout
+    @Bean
+    public FanoutExchange liuyangExchangeFanout() {
+        return new FanoutExchange("liuyang.exchange.direct", true, false);
+    }
+    // liuyang.exchange.topic
+    @Bean
+    public TopicExchange liuyangExchangeTopic() {
+        return new TopicExchange("liuyang.exchange.topic", true, false);
+    }
+
+    // 2. 创建queue
+    @Bean
+    public Queue liuyangQ() {
+        return new Queue("liuyang.q", true, false, false);
+    }
+
+    // 3. 绑定exchange和queue
+    //@Bean
+    //public Binding binding01(DirectExchange liuyangExchangeDirect, Queue liuyangQ) {
+        //return BindingBuilder.bind(liuyangQ).to(liuyangExchangeDirect).;
+    //}
+*/
 }

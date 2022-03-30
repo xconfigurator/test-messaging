@@ -1,8 +1,17 @@
 spring:
   rabbitmq:
-    host: 127.0.0.1
-    port: 5672        # 不配置的话默认也是5672
-    virtual-host: /   # 不配置的话默认也是/
+    #host: 127.0.0.1
+    host: 39.104.173.57 # 阿里云服务器
+    port: 5672          # 不配置的话默认也是5672
+    virtual-host: /     # 不配置的话默认也是/
     username: guest
     password: guest
+    #listener:
+    #  direct:
+    #    acknowledge-mode: manual # manual none 默认是auto 在Listener中结合channel完成手动ACK。
+    # confirm/return 还需要配置RabbitTemplate
+    #publisher-confirm-type: simple # confirm
+    #publisher-returns: true # return
 
+server:
+  port: 8080

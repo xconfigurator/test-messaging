@@ -1,4 +1,4 @@
-package liuyang.testmessaging.queue.config;
+package liuyang.testmessaging.queue20211202.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;

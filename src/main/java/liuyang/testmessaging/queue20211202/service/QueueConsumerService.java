@@ -1,12 +1,11 @@
-package liuyang.testmessaging.queue.service;
+package liuyang.testmessaging.queue20211202.service;
 
-import liuyang.testmessaging.queue.QueueService;
+import liuyang.testmessaging.queue20211202.QueueService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -26,7 +25,7 @@ public class QueueConsumerService {
         doService();
     }*/
 
-    @Async// Spring 线程池管理的一个独立的线程执行它
+    @Async// Spring 线程池管理的一个独立的线程执行它 (不能省略，否则会阻塞Spring Framework主线程，造成容器无法启动！)
     public void doService() {
         while (true) {// queue是一个阻塞队列，不用担心这样写会CPU 100%
             try {
@@ -43,5 +42,4 @@ public class QueueConsumerService {
             }
         }
     }
-
 }
