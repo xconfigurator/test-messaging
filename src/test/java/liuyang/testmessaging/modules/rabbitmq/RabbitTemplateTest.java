@@ -16,17 +16,48 @@ import java.util.Map;
 /**
  * @author liuyang
  * @scine 2021/4/16
+ * @update 2022/3/31 补充示例 并测试通过
  *
  * 注：单纯使用RabbitTemplate不需要使用@EnableRabbit
+ * 注：20220331 liuyang: RabbitMQ的使用中，可以吧exchange+routing key视为一般语义上的“队列名称”， RabbitMQ通过exchange + routing key的方式提供了在服务器端更多的组合方式。
  */
 @SpringBootTest
-@ActiveProfiles("test")// 主要是避开默认端口，这样就可以配合测试@RabbitListener
+@ActiveProfiles("client")// 主要是避开默认端口，这样就可以配合测试@RabbitListener
 @Slf4j
 public class RabbitTemplateTest {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+    @Test
+    public void testDirect() {
+        rabbitTemplate.convertAndSend("liuyang.exchange.direct", "liuyang.q", "to liuyang.q " + System.currentTimeMillis());
+        rabbitTemplate.convertAndSend("liuyang.exchange.direct", "liuyang.q.emps", "to liuyang.q.emps " + System.currentTimeMillis());
+        rabbitTemplate.convertAndSend("liuyang.exchange.direct", "liuyang.q.news", "to liuyang.q.news " + System.currentTimeMillis());
+        rabbitTemplate.convertAndSend("liuyang.exchange.direct", "liuyang.q2.news", "to liuyang.q2.news " + System.currentTimeMillis());
+    }
+
+    @Test
+    public void testFanout() {
+        //rabbitTemplate.convertAndSend("liuyang.exchange.fanout","foo " + System.currentTimeMillis());// 202203311556 这样收不到
+        //rabbitTemplate.convertAndSend("liuyang.exchange.fanout", "随便写什么，与fanout类型的exchange绑定的queue都会接收到。但这个参数必须写！","foo " + System.currentTimeMillis());// ok
+        rabbitTemplate.convertAndSend("liuyang.exchange.fanout", null, "foo " + System.currentTimeMillis());// 传null也可以
+    }
+
+    @Test
+    public void testTopic01News() {
+        // 预期有两个队列监听器响应
+        rabbitTemplate.convertAndSend("liuyang.exchange.topic", "foo.news", "news " + System.currentTimeMillis());
+    }
+
+    @Test
+    public void testTopic02Q() {
+        // 预期有三个队列监听器响应
+        rabbitTemplate.convertAndSend("liuyang.exchange.topic", "q.bar", "q " + System.currentTimeMillis());
+    }
+
+    // ///////////////////////////////////////////////////////
+    // old .................
     // 发送
     @Test
     public void testConvertAndSend() {
@@ -42,7 +73,7 @@ public class RabbitTemplateTest {
         // rabbitTemplate.convertAndSend(exchange, routeKey, obj);
 
         // String
-        rabbitTemplate.convertAndSend("liuyang.exchange.direct", "liuyang.q.gulixueyuan.news", String.format(String.format("hello, rabbittemplate " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()))));
+        rabbitTemplate.convertAndSend("liuyang.exchange.direct", "liuyang.q2.news", String.format(String.format("hello, rabbittemplate " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()))));
 
         // Object
         Map<String, String> param = new HashMap<>();
@@ -56,8 +87,10 @@ public class RabbitTemplateTest {
     @RepeatedTest(2)
     @Test
     public void testResiveAndConvert() {
-        Object o = rabbitTemplate.receiveAndConvert("liuyang.q.gulixueyuan.news");
+        Object o = rabbitTemplate.receiveAndConvert("liuyang.q2.news");
         log.info("o.getClass() = " + o.getClass());
         System.out.println(o);
     }
+
+
 }

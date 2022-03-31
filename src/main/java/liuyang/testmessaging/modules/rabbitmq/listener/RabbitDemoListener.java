@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 /**
  * @author liuyang
  * @scine 2021/4/16
+ *
+ * 注：202203311445 实测 如果MQ中这些队列不存在则项目启动会报错。
+ *
  */
 @Service
 @Slf4j
@@ -24,9 +27,9 @@ public class RabbitDemoListener {
         log.info("liuyang.q.emps = {}", msg);
     }
 
-    @RabbitListener(queues = {"liuyang.q.gulixueyuan.news"})
+    @RabbitListener(queues = {"liuyang.q2.news"})
     public void receiveQ3(Object msg) {
-        log.info("liuyang.q.gulixueyuan.news = {}", msg);
+        log.info("liuyang.q2.news = {}", msg);
     }
 
     @RabbitListener(queues = {"liuyang.q.news"})
