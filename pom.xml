@@ -29,6 +29,13 @@
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
         </dependency>
+        <!-- ActiveMQ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-activemq</artifactId>
+        </dependency>
+        <!-- RocketMQ -->
+        <!-- TODO -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
