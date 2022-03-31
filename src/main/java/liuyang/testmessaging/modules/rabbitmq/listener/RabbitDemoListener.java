@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class RabbitDemoListener {
 
-    // 最好指定Object的类型 这样MessageConverter就可以完成反序列化
+    // 最好明确指定类型 这样MessageConverter就可以完成反序列化
     @RabbitListener(queues = {"liuyang.q"})
     public void receiveQ01(Object msg) {// 参数类型可以直接写成传输的DTO
     // public void receive(Message msg) { // 可以拿到消息头信息 msg.getBody(); msg.getMessageProperties();
