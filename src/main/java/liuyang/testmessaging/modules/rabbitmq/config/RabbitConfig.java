@@ -25,6 +25,7 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitConfig {
 
     // 序列化为JSON(默认采用JDK的序列化器)
+    // Ctrl + H (IntelliJ 看实现关系)
     @Bean
     public MessageConverter messageConverter() {
         return new Jackson2JsonMessageConverter();

@@ -29,6 +29,7 @@ public class RabbitTemplateTest {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+    // JMS:p2p 1:1
     @Test
     public void testDirect() {
         rabbitTemplate.convertAndSend("liuyang.exchange.direct", "liuyang.q", "to liuyang.q " + System.currentTimeMillis());
@@ -37,6 +38,7 @@ public class RabbitTemplateTest {
         rabbitTemplate.convertAndSend("liuyang.exchange.direct", "liuyang.q2.news", "to liuyang.q2.news " + System.currentTimeMillis());
     }
 
+    // JMS:Topic 1:N
     @Test
     public void testFanout() {
         //rabbitTemplate.convertAndSend("liuyang.exchange.fanout","foo " + System.currentTimeMillis());// 202203311556 这样收不到
@@ -44,17 +46,22 @@ public class RabbitTemplateTest {
         rabbitTemplate.convertAndSend("liuyang.exchange.fanout", null, "foo " + System.currentTimeMillis());// 传null也可以
     }
 
+    // RabbitMQ特色：M:N
     @Test
     public void testTopic01News() {
         // 预期有两个队列监听器响应
         rabbitTemplate.convertAndSend("liuyang.exchange.topic", "foo.news", "news " + System.currentTimeMillis());
     }
 
+    // RabbitMQ特色：M:N
     @Test
     public void testTopic02Q() {
         // 预期有三个队列监听器响应
         rabbitTemplate.convertAndSend("liuyang.exchange.topic", "q.bar", "q " + System.currentTimeMillis());
     }
+
+    // Spring Cloud Stream测试
+
 
     // ///////////////////////////////////////////////////////
     // old .................

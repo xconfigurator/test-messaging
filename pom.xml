@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- 关于跳过测试：IntelliJ Maven 试图有一个“小闪电” 叫'Skip Tests Mode', 选择它！ -->
+    <!-- 关于跳过测试：package -DskipTests -->
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -14,9 +16,13 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>test-messaging</name>
     <description>Demo project for Spring Boot</description>
+
     <properties>
         <java.version>11</java.version>
+        <springcloud.stream.version>Hoxton.SR1</springcloud.stream.version>
+        <springcloud.alibaba.version>2.1.0.RELEASE</springcloud.alibaba.version>
     </properties>
+
     <dependencies>
         <!-- RabbitMQ -->
         <!-- https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.build-systems.starters -->
@@ -37,6 +43,12 @@
         </dependency>
         <!-- RocketMQ -->
         <!-- TODO -->
+
+        <!-- Spring Cloud Stream 202204011416 add -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -80,6 +92,35 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <!-- dependencyManagement -->
+    <!--
+    1. 一般写在父pom.xml中。
+    2. 让所有在子项目中引用指定的依赖不用显式列出版本号。
+    3. 只是声明依赖，并不现实引入jar包。
+    -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot -->
+            <!-- 注意：周阳的实验环境版本是2.2.2 配Spring Cloud Hoxton.SR1 配Spring Cloud Alibaba 2.1.0.RELEASE -->
+            <!-- Spring Cloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${springcloud.stream.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Spring Cloud Alibaba -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${springcloud.alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
