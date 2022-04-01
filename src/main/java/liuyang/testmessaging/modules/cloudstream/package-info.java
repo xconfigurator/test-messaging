@@ -13,6 +13,8 @@
  * @StreamListener
  * @EnableBinding   指信道channel和exchange绑定在一起
  *
+ * 注：所有的差异化、个性化的东西被放在了配置文件中。而使用的消息生产、消费的代码是同一套（且不涉及下面的MQ的特性）。
+ *
  * @author liuyang(wx)
  * @since 2022/4/1
  */
