@@ -1,9 +1,9 @@
 package liuyang.testmessaging.modules.rabbitmq;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.amqp.core.AmqpAdmin;
+/*import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Exchange;
+import org.springframework.amqp.core.Exchange;*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -22,7 +22,7 @@ public class AmqpAdminTest {
 
     private static final String EXCHANGE_NAME = "exchange.123";
 
-    @Autowired
+/*    @Autowired
     private AmqpAdmin amqpAdmin;
 
     @Test
@@ -33,5 +33,5 @@ public class AmqpAdminTest {
     @Test
     void testDelete() {
         amqpAdmin.deleteExchange(EXCHANGE_NAME);
-    }
+    }*/
 }

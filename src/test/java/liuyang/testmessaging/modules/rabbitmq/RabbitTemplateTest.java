@@ -3,7 +3,7 @@ package liuyang.testmessaging.modules.rabbitmq;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+//import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -26,39 +26,39 @@ import java.util.Map;
 @Slf4j
 public class RabbitTemplateTest {
 
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
+/*    @Autowired
+    private RabbitTemplate rabbitTemplate;*/
 
     // JMS:p2p 1:1
-    @Test
+    /*@Test
     public void testDirect() {
         rabbitTemplate.convertAndSend("liuyang.exchange.direct", "liuyang.q", "to liuyang.q " + System.currentTimeMillis());
         rabbitTemplate.convertAndSend("liuyang.exchange.direct", "liuyang.q.emps", "to liuyang.q.emps " + System.currentTimeMillis());
         rabbitTemplate.convertAndSend("liuyang.exchange.direct", "liuyang.q.news", "to liuyang.q.news " + System.currentTimeMillis());
         rabbitTemplate.convertAndSend("liuyang.exchange.direct", "liuyang.q2.news", "to liuyang.q2.news " + System.currentTimeMillis());
-    }
+    }*/
 
     // JMS:Topic 1:N
-    @Test
+    /*@Test
     public void testFanout() {
         //rabbitTemplate.convertAndSend("liuyang.exchange.fanout","foo " + System.currentTimeMillis());// 202203311556 这样收不到
         //rabbitTemplate.convertAndSend("liuyang.exchange.fanout", "随便写什么，与fanout类型的exchange绑定的queue都会接收到。但这个参数必须写！","foo " + System.currentTimeMillis());// ok
         rabbitTemplate.convertAndSend("liuyang.exchange.fanout", null, "foo " + System.currentTimeMillis());// 传null也可以
-    }
+    }*/
 
     // RabbitMQ特色：M:N
-    @Test
+    /*@Test
     public void testTopic01News() {
         // 预期有两个队列监听器响应
         rabbitTemplate.convertAndSend("liuyang.exchange.topic", "foo.news", "news " + System.currentTimeMillis());
-    }
+    }*/
 
     // RabbitMQ特色：M:N
-    @Test
+    /*@Test
     public void testTopic02Q() {
         // 预期有三个队列监听器响应
         rabbitTemplate.convertAndSend("liuyang.exchange.topic", "q.bar", "q " + System.currentTimeMillis());
-    }
+    }*/
 
     // Spring Cloud Stream测试
 
@@ -66,7 +66,7 @@ public class RabbitTemplateTest {
     // ///////////////////////////////////////////////////////
     // old .................
     // 发送
-    @Test
+    /*@Test
     public void testConvertAndSend() {
         log.info("hello, rabbitmq");
         // exchange
@@ -88,16 +88,16 @@ public class RabbitTemplateTest {
         param.put("k2", "bar");
         param.put("datetime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         rabbitTemplate.convertAndSend("liuyang.exchange.direct", "liuyang.q", param);// 如果选择fanout的exchange，则填什么routingKey是无所谓的。
-    }
+    }*/
 
     // 接收
-    @RepeatedTest(2)
+    /*@RepeatedTest(2)
     @Test
     public void testResiveAndConvert() {
         Object o = rabbitTemplate.receiveAndConvert("liuyang.q2.news");
         log.info("o.getClass() = " + o.getClass());
         System.out.println(o);
-    }
+    }*/
 
 
 }

@@ -26,29 +26,36 @@
     <dependencies>
         <!-- RabbitMQ -->
         <!-- https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.build-systems.starters -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
-        </dependency>
+        </dependency>-->
         <!--Kafka -->
         <!-- https://spring.io/projects/spring-kafka  -->
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
         </dependency>
+
         <!-- ActiveMQ -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-activemq</artifactId>
         </dependency>
-        <!-- RocketMQ -->
+
+        <!-- RocketMQ 阿里维护 -->
         <!-- TODO -->
 
         <!-- Spring Cloud Stream 202204011416 add -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
-        </dependency>
+        </dependency>-->
+        <!--<dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit-test</artifactId>
+            <scope>test</scope>
+        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -71,11 +78,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.amqp</groupId>
-            <artifactId>spring-rabbit-test</artifactId>
             <scope>test</scope>
         </dependency>
 

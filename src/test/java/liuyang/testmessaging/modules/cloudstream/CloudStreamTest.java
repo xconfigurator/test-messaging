@@ -13,7 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
  * @since 2022/4/1
  */
 @SpringBootTest
-@ActiveProfiles("client")
+@ActiveProfiles({"client", "stream"})
 @Slf4j
 public class CloudStreamTest {
 

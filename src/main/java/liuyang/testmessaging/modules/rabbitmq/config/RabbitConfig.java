@@ -1,8 +1,8 @@
 package liuyang.testmessaging.modules.rabbitmq.config;
 
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.amqp.support.converter.MessageConverter;
+//import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+//import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+//import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,21 +15,24 @@ import org.springframework.context.annotation.Configuration;
  * 3. 自动配置类向容器中注册了AmqpAdmin。用于创建exchange，queue，binding
  * 4. @RabbitListener 见RabbitListenerDemo
  *
+ * 发送：RabbitTemplate
+ * 监听：@RabbitListener(queues = {"liuyang.q.emps"})
+ *
  * @author liuyang
  * @scine 2021/4/16
  * @update 2021/11/23
  * @update 2022/03/07   在配置文件中创建exchange和queue并执行绑定。
  */
-@Configuration
-@EnableRabbit // 配合RabbitListener
+//@Configuration
+//@EnableRabbit // 配合RabbitListener
 public class RabbitConfig {
 
     // 序列化为JSON(默认采用JDK的序列化器)
     // Ctrl + H (IntelliJ 看实现关系)
-    @Bean
-    public MessageConverter messageConverter() {
+    //@Bean
+    /*public MessageConverter messageConverter() {
         return new Jackson2JsonMessageConverter();
-    }
+    }*/
 
 /*
     // 20220307
